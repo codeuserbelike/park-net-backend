@@ -1,0 +1,61 @@
+park-net-api/
+├──.venv/                      # Entorno virtual
+|
+├── app/                       # Directorio principal de la aplicación
+│   ├── __init__.py            # Hace que 'app' sea un paquete Python
+│   │
+│   ├── core/                  # Componentes centrales compartidos
+│   │   ├── __init__.py        # Hace que 'core' sea un paquete
+│   │   ├── config.py          # Configuración de la app (variables de entorno, settings)
+│   │   ├── security.py        # Seguridad: JWT, hashing, verificación tokens
+│   │   └── dependencies.py    # Inyección de dependencias (DB, servicios)
+│   │
+│   ├── modules/               # Módulos funcionales de la aplicación
+│   │   ├── __init__.py        # Hace que 'modules' sea un paquete
+│   │   │
+│   │   ├── auth/              # Módulo de autenticación
+│   │   │   ├── __init__.py    # Hace que 'auth' sea un paquete
+│   │   │   ├── router.py      # Endpoints: login, refresh, logout
+│   │   │   ├── service.py     # Lógica: validación credenciales, creación tokens
+│   │   │   ├── schemas.py     # Esquemas Pydantic: Token, UserAuth, etc.
+│   │   │   └── models.py      # Modelo de usuario para DB
+│   │   │
+│   │   ├── residentes/        # Módulo de gestión de residentes
+│   │   │   ├── __init__.py    # Paquete residentes
+│   │   │   ├── router.py      # Endpoints CRUD: crear, leer, actualizar, eliminar residentes
+│   │   │   ├── service.py     # Lógica de negocio específica para residentes
+│   │   │   ├── schemas.py     # Esquemas: ResidentCreate, ResidentUpdate, ResidentOut
+│   │   │   ├── models.py      # Modelo DB para residentes
+│   │   │   └── repository.py  # Operaciones DB: CRUD específico para residentes
+│   │   │
+│   │   ├── solicitudes/       # Módulo de gestión de solicitudes
+│   │   │   ├── __init__.py    # Paquete solicitudes
+│   │   │   ├── router.py      # Endpoints: crear, listar, cambiar estado solicitudes
+│   │   │   ├── service.py     # Lógica: validación estados, reglas de negocio
+│   │   │   ├── schemas.py     # Esquemas: RequestCreate, RequestStatus, RequestOut
+│   │   │   ├── models.py      # Modelo DB para solicitudes
+│   │   │   └── repository.py  # Operaciones DB para solicitudes
+│   │   │
+│   │   └── sorteo/            # Módulo de sistema de sorteo
+│   │       ├── __init__.py    # Paquete sorteo
+│   │       ├── router.py      # Endpoints: ejecutar sorteo, ver resultados
+│   │       ├── service.py     # Algoritmo de sorteo con prioridades
+│   │       ├── schemas.py     # Esquemas: LotteryParams, LotteryResult
+│   │       └── models.py      # Modelos: ResultadoSorteo, ConfigPrioridad
+│   │
+│   ├── shared/                # Utilidades compartidas entre módulos
+│   │   ├── __init__.py        # Paquete shared
+│   │   ├── repository.py      # CRUD base genérico (si se necesita)
+│   │   ├── exceptions.py      # Excepciones personalizadas
+│   │   └── utils.py           # Funciones helper: fechas, validaciones, etc.
+│   │
+│   ├── database/              # Configuración de base de datos
+│   │   ├── __init__.py        # Paquete database
+│   │   └── mongodb.py         # Conexión a MongoDB, inicialización cliente
+│   │
+│   └── main.py                # Punto de entrada de la app FastAPI
+│
+├── .env                       # Variables de entorno (no versionar en Git)
+├── .gitignore                 # Archivos a ignorar por Git
+├── main.py                    # Punto de entrada alternativo (opcional)
+└── requirements.txt           # Dependencias de Python
